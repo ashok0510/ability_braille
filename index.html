@@ -1,225 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ability Braille</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ability Braille</title>
+  <style>
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        line-height: 1.6;
-        background-color: #fff;
-        color: #000;
-        font-size: 18px; /* larger default font */
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #fafafa;
+      color: #222;
+      font-size: 18px;
     }
 
     a:focus {
-        outline: 3px solid #4CAF50; /* visible focus for keyboard users */
+      outline: 3px solid #4CAF50;
     }
 
-    header, nav, main, footer {
-        display: block;
-    }
-
-    /* Skip link for screen reader users */
+    /* Skip link for accessibility */
     .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        background: #4CAF50;
-        color: white;
-        padding: 8px;
-        z-index: 100;
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #4CAF50;
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
     }
     .skip-link:focus {
-        top: 0;
+      top: 10px;
     }
 
     header {
-        background-color: #4CAF50;
-        color: white;
-        padding: 20px 0;
-        text-align: center;
+      background: linear-gradient(135deg, #4CAF50, #2e7d32);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 10px 0;
+      font-size: 1.2rem;
     }
 
     nav {
-        background-color: #000;
+      background-color: #111;
     }
 
     nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
     }
 
     nav ul li {
-        margin: 0 15px;
+      margin: 0 15px;
     }
 
     nav ul li a {
-        color: white;
-        text-decoration: none;
-        padding: 14px 0;
-        display: block;
+      color: white;
+      text-decoration: none;
+      padding: 14px 0;
+      display: block;
+      font-weight: bold;
     }
 
     nav ul li a:hover {
-        color: #4CAF50;
+      color: #4CAF50;
     }
 
     section {
-        padding: 50px 20px;
-        max-width: 1000px;
-        margin: auto;
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
     }
 
     section h2 {
-        text-align: center;
-        margin-bottom: 30px;
-        color: #4CAF50;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #4CAF50;
+      font-size: 2rem;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #4CAF50;
+      margin: 10px auto;
+      border-radius: 2px;
     }
 
     .products {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
     }
 
     .product {
-        background-color: #f2f2f2;
-        border-radius: 8px;
-        padding: 20px;
-        width: 220px;
-        text-align: center;
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      width: 240px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .product img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 5px;
-        margin-bottom: 15px;
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     footer {
-        background-color: #000;
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
+      background-color: #111;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
     }
 
     footer a {
-        color: #4CAF50;
-        text-decoration: none;
+      color: #4CAF50;
+      text-decoration: none;
     }
 
-    /* High contrast mode toggle */
     body.high-contrast {
-        background-color: #000;
-        color: #fff;
+      background-color: #000;
+      color: #fff;
     }
 
     body.high-contrast a {
-        color: #00ff00;
+      color: #00ff00;
     }
-
-</style>
-<script>
-    // Smooth scroll for navigation
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
         });
+      });
     });
 
-    // Toggle high contrast mode
     function toggleContrast() {
-        document.body.classList.toggle('high-contrast');
+      document.body.classList.toggle('high-contrast');
     }
-</script>
+  </script>
 </head>
 <body>
 
-<a href="#maincontent" class="skip-link">Skip to main content</a>
+<a href="#maincontent" class="skip-link">Skip to Main Content</a>
 
 <header role="banner">
-    <h1>Ability Braille</h1>
-    <p>Empowering accessibility through braille printing</p>
-    <button onclick="toggleContrast()" aria-label="Toggle high contrast mode">High Contrast</button>
+  <h1>Ability Braille</h1>
+  <p>Empowering accessibility through braille printing</p>
+  <button onclick="toggleContrast()" aria-label="Toggle high contrast mode">High Contrast</button>
 </header>
 
 <nav role="navigation" aria-label="Main navigation">
-    <ul>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+  <ul>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
 <main id="maincontent" role="main">
 
-    <!-- About Section -->
-    <section id="about" aria-labelledby="about-title">
-        <h2 id="about-title">About Ability Enterprise</h2>
-        <p>
-            Ability Enterprise specializes in creating high-quality braille products for companies and organizations.
-            We aim to make communication inclusive for visually impaired employees and clients by providing visiting cards, labels, greetings, and certificates in braille.
-            Our commitment is to empower accessibility and inclusivity in workplaces.
-        </p>
-    </section>
+  <!-- About Section -->
+  <section id="about" role="region" aria-labelledby="about-title">
+    <h2 id="about-title">About Ability Enterprise</h2>
+    <p style="text-align:center; max-width:800px; margin:auto;">
+      Ability Enterprise specializes in creating high-quality braille products for companies and organizations.  
+      Our mission is to ensure inclusivity by providing visiting cards, labels, greeting cards, and certificates in braille.  
+      We are committed to empowering accessibility and creating equal opportunities for visually impaired employees and clients.
+    </p>
+  </section>
 
-    <!-- Products Section -->
-    <section id="products" aria-labelledby="products-title">
-        <h2 id="products-title">Our Products</h2>
-        <div class="products">
-            <div class="product">
-                <img src="placeholder-visiting-card.jpg" alt="Braille visiting card">
-                <h3>Visiting Cards</h3>
-                <p>Professional braille visiting cards for employees and clients.</p>
-            </div>
-            <div class="product">
-                <img src="placeholder-greeting-card.jpg" alt="Braille greeting card">
-                <h3>Greeting Cards</h3>
-                <p>Customizable greeting cards in braille for special occasions.</p>
-            </div>
-            <div class="product">
-                <img src="placeholder-labels.jpg" alt="Braille labels">
-                <h3>Labels</h3>
-                <p>Braille labels for office, product packaging, and more.</p>
-            </div>
-            <div class="product">
-                <img src="placeholder-certificate.jpg" alt="Braille certificate">
-                <h3>Certificates</h3>
-                <p>Elegant braille certificates for employee recognition and awards.</p>
-            </div>
-        </div>
-    </section>
+  <!-- Products Section -->
+  <section id="products" role="region" aria-labelledby="products-title">
+    <h2 id="products-title">Our Products</h2>
+    <div class="products">
+      <div class="product">
+        <h3>Visiting Cards</h3>
+        <p>Professional braille visiting cards for employees and clients.</p>
+      </div>
+      <div class="product">
+        <h3>Greeting Cards</h3>
+        <p>Customizable greeting cards in braille for special occasions.</p>
+      </div>
+      <div class="product">
+        <h3>Labels</h3>
+        <p>Braille labels for offices, packaging, and organizational needs.</p>
+      </div>
+      <div class="product">
+        <h3>Certificates</h3>
+        <p>Elegant braille certificates for employee recognition and awards.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact Us</h2>
-        <p>We would love to hear from you! Reach out to Ability Enterprise for your braille printing needs.</p>
-        <p>Email: <a href="mailto:contact@abilitybraille.com">contact@abilitybraille.com</a></p>
-        <p>Phone: +91-XXXXXXXXXX</p>
-        <p>Address: 123, Accessibility Street, Your City, India</p>
-    </section>
+  <!-- Contact Section -->
+  <section id="contact" role="region" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact Us</h2>
+    <p style="text-align:center;">We would love to hear from you! Reach out to Ability Enterprise for your braille printing needs.</p>
+    <p><strong>Contact Person:</strong> Venkatesh K N</p>
+    <p><strong>Address:</strong><br>
+      #378 Kodandarama Nagar (Halanayakanahalli),<br>
+      2nd Main Road, 7th Cross,<br>
+      Bangalore - 560035
+    </p>
+    <p><strong>Mobile:</strong> 
+      <a href="tel:+918453882212">8453882212</a>
+    </p>
+    <p><strong>WhatsApp:</strong> 
+      <a href="https://wa.me/918453882212?text=Hello%20Ability%20Braille,%20I%20would%20like%20to%20know%20more%20about%20your%20products." 
+         target="_blank" aria-label="Chat with us on WhatsApp">
+        8453882212
+      </a>
+    </p>
+    <p><strong>Email:</strong> 
+      <a href="mailto:abilitybraille@gmail.com">abilitybraille@gmail.com</a>
+    </p>
+  </section>
 
 </main>
 
 <footer role="contentinfo">
-    <p>&copy; 2025 Ability Enterprise. All rights reserved.</p>
-    <p>Website by Ability Braille</p>
+  <p>&copy; 2025 Ability Enterprise. All rights reserved.</p>
 </footer>
 
 </body>
 </html>
+ 
